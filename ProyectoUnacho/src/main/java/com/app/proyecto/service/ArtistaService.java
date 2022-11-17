@@ -62,4 +62,24 @@ public class ArtistaService implements IArtistaService {
 					
 	}
 	
+	//ELIMINAR UN ARTISTA POR SU ID
+	@Override
+	public ResponseEntity<Map<String, String>> eliminarArtista(int idArtista) {		
+
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("message", "Ese artista no fue encontrado");
+	    errorResponse.put("status", HttpStatus.NOT_FOUND.toString());
+	    
+	    Map<String, String> okResponse = new HashMap<>();
+	    okResponse.put("message", "El artista fue eliminado correctamente");
+	    okResponse.put("status", HttpStatus.OK.toString());
+	    
+		return repoArtista.findById(idArtista).map( p -> {
+					repoArtista.deleteById(idArtista);
+					return new ResponseEntity<>(okResponse, HttpStatus.OK);
+				})
+				.orElse(new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND));
+		
+	}	
+	
 }

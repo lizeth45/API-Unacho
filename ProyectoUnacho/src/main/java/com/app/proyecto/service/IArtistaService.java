@@ -12,4 +12,5 @@ public interface IArtistaService {
 	ResponseEntity<Map<String, String>> insertarArtista(Artista obj);
 	ResponseEntity<Map<String, String>> actualizarArtista(Artista obj, int idArtista);
 	List<Artista> consultarbyInicial(String inicial);
+	ResponseEntity<Map<String, String>> eliminarArtista(int idArtista);
 }

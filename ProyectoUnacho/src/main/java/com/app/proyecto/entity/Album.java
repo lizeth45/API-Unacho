@@ -15,45 +15,45 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "tb_album")
-public class Album{
-	@Id	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+public class Album {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Album")
 	private int idAlbum;
-	
+
 	@Column(name = "nombre_album")
 	private String nombreAlbum;
-	
+
 	@Column(name = "anio_lanzamiento")
 	private int anio_lanzAlbum;
-	
+
 	@Column(name = "productora")
 	private String productora;
-	
+
 	@Column(name = "noTracks")
 	private int noTracks;
-		
+
 	@Column(name = "imagen_URLAlbum")
 	private String imagenURLAlbum;
-	
-	//Relacion hacia la tabla de artista, donde el mapeo se hace en artista
-	@ManyToOne(cascade=CascadeType.REMOVE)
-	@JoinColumn(name="id_Artista",referencedColumnName="id_Artista")
+
+	// Relacion hacia la tabla de artista, donde el mapeo se hace en artista
+	@ManyToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "id_Artista", referencedColumnName = "id_Artista")
 	private Artista artista;
 
-	//Aqui se hace el mapeo que se usara en la tabla de Canciones
-	@ManyToMany(fetch = FetchType.LAZY , cascade=CascadeType.ALL)
-	@JoinTable(
-		name = "tb_album_cancion", 
-		joinColumns = @JoinColumn(name = "id_Album_fk"),
-		inverseJoinColumns = @JoinColumn(name = "id_Cancion_fk")
-	)
+	// Aqui se hace el mapeo que se usara en la tabla de Canciones
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "tb_album_cancion", joinColumns = @JoinColumn(name = "id_Album_fk"), inverseJoinColumns = @JoinColumn(name = "id_Cancion_fk"))
 	private Set<Canciones> canciones = new HashSet<>();
 
-	
+	public void addCancion(Canciones track){
+        if(this.canciones == null){
+            this.canciones = new HashSet<>();
+        }
+        this.canciones.add(track);
+    }
 
 	public Album(String nombreAlbum, int anio_lanzAlbum, String productora, int noTracks, String imagenURLAlbum,
 			Artista artista, Set<Canciones> canciones) {
@@ -67,14 +67,10 @@ public class Album{
 		this.canciones = canciones;
 	}
 
-
-
 	public Album() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public int getIdAlbum() {
 		return idAlbum;
@@ -131,6 +127,12 @@ public class Album{
 	public void setArtista(Artista artista) {
 		this.artista = artista;
 	}
-	
 
+	public Set<Canciones> getCanciones() {
+		return canciones;
+	}
+
+	public void setCanciones(Set<Canciones> canciones) {
+		this.canciones = canciones;
+	}
 }

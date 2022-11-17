@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,12 @@ public class ArtistaController {
 	@GetMapping("/artistas/{letra}")
 	public List<Artista> showArtistasxInicial(@PathVariable("letra") String inicial){  
 		return lognegocioArtista.consultarbyInicial(inicial);
+	}
+	
+	//Elimina un artista con el id indicado
+	@DeleteMapping("/artistas/{id}")
+	public ResponseEntity<?> eliminarArtista(@PathVariable("id") int idArtista){
+		return lognegocioArtista.eliminarArtista(idArtista);      
 	}
 	
 }

@@ -11,5 +11,7 @@ public interface ICancionesService{
 
 	List<Canciones> consultaCanciones();
 	ResponseEntity<Map<String, String>> insertarCancion(Canciones obj);
+	ResponseEntity<Map<String, String>> actualizarCancion(Canciones obj, int idCancion);
+	ResponseEntity<Map<String, String>> eliminarCancion(int idCancion);
 
 }

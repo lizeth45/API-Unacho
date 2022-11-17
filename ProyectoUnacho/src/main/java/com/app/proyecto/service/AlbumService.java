@@ -9,65 +9,65 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.app.proyecto.entity.Canciones;
-import com.app.proyecto.jpa.ICancionesjpa;
+import com.app.proyecto.entity.Album;
+import com.app.proyecto.jpa.IAlbumjpa;
 
 @Service
-public class CancionesService implements ICancionesService {
+public class AlbumService implements IAlbumService {
 
 	@Autowired
-	private ICancionesjpa repoCanciones;
+	private IAlbumjpa repoAlbum;
 
-	// CONSULTA TODAS LAS CANCIONES
+	// SELECCIONAR TODOS LOS ALBUMNES
 	@Override
-	public List<Canciones> consultaCanciones() {
+	public List<Album> consultaAlbum() {
 		// TODO Auto-generated method stub
-		return repoCanciones.findAll();
+		return repoAlbum.findAll();
 	}
 
-	// INSERTA UNA NUEVA CANCION
+	// INSERTA UN NUEVO ALBUM
 	@Override
-	public ResponseEntity<Map<String, String>> insertarCancion(Canciones obj) {
+	public ResponseEntity<Map<String, String>> insertarAlbum(Album obj) {
 		Map<String, String> okResponse = new HashMap<>();
-		okResponse.put("message", "La cancion se ha registrado correctamente");
+		okResponse.put("message", "El album se ha registrado correctamente");
 		okResponse.put("status", HttpStatus.CREATED.toString());
-		repoCanciones.save(obj);
+		repoAlbum.save(obj);
 		return new ResponseEntity<>(okResponse, HttpStatus.CREATED);
 	}
 
-	// ACTUALIZACION DE UNA CANCION POR ID
+	// ACTUALIZACION DE UN ALBUM POR ID
 	@Override
-	public ResponseEntity<Map<String, String>> actualizarCancion(Canciones obj, int idCancion) {
+	public ResponseEntity<Map<String, String>> actualizarAlbum(Album obj, int idAlbum) {
 		Map<String, String> okResponse = new HashMap<>();
-		okResponse.put("message", "Los datos de la cancion han sido actualizados correctamente");
+		okResponse.put("message", "Los datos del album han sido actualizados correctamente");
 		okResponse.put("status", HttpStatus.OK.toString());
 
 		Map<String, String> errorResponse = new HashMap<>();
-		errorResponse.put("message", "No existe una cancion con el Id: " + idCancion);
+		errorResponse.put("message", "No existe un album con el Id: " + idAlbum);
 		errorResponse.put("status", HttpStatus.NOT_FOUND.toString());
 
-		return repoCanciones.findById(idCancion).map(p -> {
-			obj.setIdCancion(idCancion);
-			repoCanciones.save(obj);
+		return repoAlbum.findById(idAlbum).map(p -> {
+			obj.setIdAlbum(idAlbum);
+			repoAlbum.save(obj);
 			return new ResponseEntity<>(okResponse, HttpStatus.OK);
 		}).orElse(new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND));
 
 	}
 
-	// ELIMINAR UN ARTISTA POR SU ID
+	// ELIMINAR UN ALBUM POR SU ID
 	@Override
-	public ResponseEntity<Map<String, String>> eliminarCancion(int idCancion) {
+	public ResponseEntity<Map<String, String>> eliminarAlbum(int idAlbum) {
 
 		Map<String, String> errorResponse = new HashMap<>();
-		errorResponse.put("message", "La cancion no fue encontrada");
+		errorResponse.put("message", "El album no fue encontrado");
 		errorResponse.put("status", HttpStatus.NOT_FOUND.toString());
 
 		Map<String, String> okResponse = new HashMap<>();
-		okResponse.put("message", "La cancion fue eliminada correctamente");
+		okResponse.put("message", "El album fue eliminado correctamente");
 		okResponse.put("status", HttpStatus.OK.toString());
 
-		return repoCanciones.findById(idCancion).map(p -> {
-			repoCanciones.deleteById(idCancion);
+		return repoAlbum.findById(idAlbum).map(p -> {
+			repoAlbum.deleteById(idAlbum);
 			return new ResponseEntity<>(okResponse, HttpStatus.OK);
 		}).orElse(new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND));
 
