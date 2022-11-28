@@ -52,7 +52,7 @@ public class Usuario {
 	}
 
 	public Usuario(String nombreUsuario, String apPaterno, String apMaterno, String email, String password,
-			String fechaNacimiento, String pais, List<Playlist> playlist) {
+			String fechaNacimiento, String pais) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.apPaterno = apPaterno;
@@ -61,7 +61,6 @@ public class Usuario {
 		this.password = password;
 		this.fechaNacimiento = fechaNacimiento;
 		this.pais = pais;
-		this.playlist = playlist;
 	}
 
 

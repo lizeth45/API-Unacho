@@ -21,7 +21,7 @@ public class PlaylistService implements IPlaylistService {
 	@Override
 	public List<Playlist> consultaPlaylist() {
 		// TODO Auto-generated method stub
-		return null;
+		return repoPlaylist.findAll();
 	}
 
 	// INSERTA UNA NUEVA PLAYLIST
