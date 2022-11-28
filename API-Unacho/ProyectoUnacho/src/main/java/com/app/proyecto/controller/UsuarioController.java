@@ -37,7 +37,7 @@ public class UsuarioController {
 		@PostMapping("/usuario")
 		public String insertarUsuario(@RequestBody Usuario objUsuario) {
 			lognegocioUsuario.insertarUsuario(objUsuario);
-			return "La cancion fue registrada correctamente";
+			return "El usuario fue registrado correctamente";
 		}
 
 		// ACTUALIZAR un usuario por el id
