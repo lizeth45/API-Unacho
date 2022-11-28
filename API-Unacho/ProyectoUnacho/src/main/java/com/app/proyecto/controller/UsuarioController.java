@@ -49,7 +49,7 @@ public class UsuarioController {
 
 		// Eliminar un usuario con el id indicado
 		@DeleteMapping("/usuario/{id}")
-		public ResponseEntity<?> eliminarCancion(@PathVariable("id") int idUsuario) {
+		public ResponseEntity<?> eliminarUsuario(@PathVariable("id") int idUsuario) {
 			return lognegocioUsuario.eliminarUsuario(idUsuario);
 		}
 
