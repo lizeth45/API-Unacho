@@ -30,13 +30,13 @@ public class AlbumController {
 
 	// Muestra TODOS los albums
 	@GetMapping("/album")
-	public List<Album> showAllArtistas() {
+	public List<Album> showAllAlbums() {
 		return lognegocioAlbum.consultaAlbum();
 	}
 
 	// Muestra TODAS las canciones de un album
 	@GetMapping("/album/{id}/cancion")
-	public List<Canciones> mostrarCanciones(@PathVariable("id") int idAlbum) {
+	public List<Canciones> mostrarCancionesAlbum(@PathVariable("id") int idAlbum) {
 		return lognegocioAlbum.consultaCancionesAlbum(idAlbum);
 	}
 
