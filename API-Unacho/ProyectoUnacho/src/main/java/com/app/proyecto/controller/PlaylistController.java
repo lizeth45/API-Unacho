@@ -29,7 +29,7 @@ public class PlaylistController {
 
 	// Muestra TODOS las playlist
 	@GetMapping("/playlist")
-	public List<Playlist> showAllCanciones() {
+	public List<Playlist> showAllPlaylist() {
 		return lognegocioPlaylist.consultaPlaylist();
 	}
 
