@@ -36,14 +36,14 @@ public class ArtistaController {
 	
 	//AGREGAR un artista
 	@PostMapping("/artistas")
-	public String insertar(@RequestBody Artista objArtista){
+	public String insertarArtista(@RequestBody Artista objArtista){
 		lognegocioArtista.insertarArtista(objArtista);
 		return "El artista fue registrado correctamente";
 	}
 	
 	//ACTUALIZAR un artista por el id
 	@PutMapping("/artistas/{id}")
-	public ResponseEntity<Map<String, String>> actualizar(@RequestBody Artista obj, @PathVariable("id") int idArtista){
+	public ResponseEntity<Map<String, String>> actualizarArtista(@RequestBody Artista obj, @PathVariable("id") int idArtista){
 		return lognegocioArtista.actualizarArtista(obj, idArtista);
 	}
 	
