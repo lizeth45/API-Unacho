@@ -40,9 +40,9 @@ public class Artista{
 	//Mapeo que usara ALBUM
 	@OneToMany(mappedBy = "artista", fetch = FetchType.EAGER)
 	private List<Album> album;
-
+	
 	public Artista(String nombreArtista, int edadArtista, String generoMusicalA, String popularidadA,
-			String facebookURL, String imagenURLArtista, List<Album> album) {
+			String facebookURL, String imagenURLArtista) {
 		super();
 		this.nombreArtista = nombreArtista;
 		this.edadArtista = edadArtista;
@@ -50,17 +50,12 @@ public class Artista{
 		this.popularidadA = popularidadA;
 		this.facebookURL = facebookURL;
 		this.imagenURLArtista = imagenURLArtista;
-		this.album = album;
 	}
-
-
 
 	public Artista() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public int getIdArtista() {
 		return idArtista;
@@ -116,13 +111,5 @@ public class Artista{
 
 	public void setImagenURLArtista(String imagenURLArtista) {
 		this.imagenURLArtista = imagenURLArtista;
-	}
-
-	public List<Album> getAlbum() {
-		return album;
-	}
-
-	public void setAlbum(List<Album> album) {
-		this.album = album;
 	}
 }

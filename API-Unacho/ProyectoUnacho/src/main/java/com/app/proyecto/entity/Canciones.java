@@ -9,8 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -41,20 +39,13 @@ public class Canciones{
 	private Set<Album> albums;
 	
 	//Mapeo para que se pueda usar la tabla de CANCIONES en PLAYLIST
-	@ManyToMany(fetch = FetchType.LAZY , cascade =CascadeType.ALL)
-	@JoinTable(
-		name = "tb_cancion_playlist", 
-		joinColumns = @JoinColumn(name = "id_Cancion_fk"),
-		inverseJoinColumns = @JoinColumn(name = "id_Playlist_fk")
-	)
+	@ManyToMany(fetch = FetchType.LAZY , cascade =CascadeType.ALL,mappedBy = "cancionesP")
 	private Set<Playlist> playlist = new HashSet<>();
-	
 	
 	public Canciones() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	
 
 	public Canciones(String nombreCancion, int anio_lanzCancion, int duracion_Cancion, String generoCancion,

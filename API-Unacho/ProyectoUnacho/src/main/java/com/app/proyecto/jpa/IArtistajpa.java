@@ -9,9 +9,6 @@ import com.app.proyecto.entity.*;
 
 public interface IArtistajpa extends JpaRepository<Artista, Integer>{
 	
-	//@Query ("select o from Artista o where o.nombreArtista like %:letra%") //Query que retorna los artistas que contegan esa letra en nombreArtista
-	//List<Artista> mostrarxinicialNombre(@Param("letra") String letra);
-	
 	//Query que retorna los artistas que su nombre inicie con Letra``
 	@Query ("select o from Artista o where o.nombreArtista like :letra%") 
 	List<Artista> mostrarxinicialNombre(@Param("letra") String letra);

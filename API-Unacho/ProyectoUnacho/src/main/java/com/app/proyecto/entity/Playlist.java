@@ -1,4 +1,5 @@
 package com.app.proyecto.entity;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -37,19 +39,28 @@ public class Playlist {
 	
 	
 	//Union de columnas usando el mapeo de CANCIONES
-	@ManyToMany(fetch = FetchType.LAZY , cascade =CascadeType.ALL,mappedBy = "playlist")
-	private Set<Canciones> canciones;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "tb_cancion_playlist",joinColumns = @JoinColumn(name = "id_Cancion_fk"),inverseJoinColumns = @JoinColumn(name = "id_Playlist_fk"))
+	private Set<Canciones> cancionesP;
 	
+	public void addCancion(Canciones track){
+        if(this.cancionesP == null){
+            this.cancionesP = new HashSet<>();
+        }
+        this.cancionesP.add(track);
+    }
 	
 	public Playlist() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
+	}	
 
-	public Playlist(String nombrePlaylist, String fechaCreacion) {
+	public Playlist(String nombrePlaylist, String fechaCreacion, Usuario usuario, Set<Canciones> canciones) {
 		super();
 		this.nombrePlaylist = nombrePlaylist;
 		this.fechaCreacion = fechaCreacion;
+		this.usuario = usuario;
+		this.cancionesP = canciones;
 	}
 
 	public int getIdPlaylist() {
@@ -74,6 +85,22 @@ public class Playlist {
 
 	public void setFechaCreacion(String fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Set<Canciones> getCanciones() {
+		return cancionesP;
+	}
+
+	public void setCanciones(Set<Canciones> canciones) {
+		this.cancionesP = canciones;
 	}
 	
 	
